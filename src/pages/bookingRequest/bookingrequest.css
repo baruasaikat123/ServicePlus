@@ -1,0 +1,54 @@
+.booking-request-container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-left: 65px;
+    background: white;
+    margin-left: 25%;
+}
+
+.booking-request-loader{
+    margin-left: 45%;
+    margin-top: 150px;
+}
+
+.no-requests-container{
+    padding:100px;
+    margin-top: 100px;
+    margin-left: 30%;
+    font-size: 45px;
+    color: #ccc;
+}
+
+.booking-request-instructions-container{
+    padding: 25px;
+    margin: 30px 150px;
+    border-left: 1px solid #ccc;
+    height: 80vh;
+}
+
+
+.instruction-icon-container{
+    z-index: 999;
+    cursor: pointer;
+    background: #ccc;
+    color: white;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .booking-request-container{
+        margin-left: 10%;
+    }
+}
+
+@media screen and (max-width: 850px){
+    .booking-request-container{
+        margin-left: 0;
+    }
+
+    .booking-request-instructions-container{
+        display: none;
+    }
+}

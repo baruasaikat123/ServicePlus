@@ -1,0 +1,48 @@
+.request-modal-component{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    z-index: 1;
+}
+
+
+
+.request-modal-container{
+    width: 500px;
+    height: 180px;
+    margin-top: 60px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.request-modal-container.reject{
+    height: 250px;
+}
+
+.request-modal-description{
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 35px;
+    padding-bottom: 20px;
+}
+
+.request-modal-btn{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.request-modal-btn-ok{
+    background: var(--app-color);
+}
+
+.request-modal-btn-ok:hover{
+    color: white;
+}
+
+.request-modal-btn-cancel:hover{
+    color: var(--app-red);
+}

@@ -1,0 +1,121 @@
+.box-container{
+    display: grid;
+    grid-template-columns: repeat(4,auto);
+    grid-gap: 20px;
+    list-style: none;
+    justify-content: center;
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-right: 20px;
+    background: white;
+}
+
+.service-category{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    color: #ccc;
+    top: 80px;
+    padding-top: 15px;
+    background: white;
+    position: sticky;
+    width: 100%;
+    cursor: pointer;
+}
+
+.service-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 35px 35px;
+
+}
+
+.service-add{
+    background: var(--app-light);
+    padding: 10px 15px;
+    width: 30%;
+    height: 70px;
+    margin: 150px;
+    display: flex;
+    border-radius: 7px;
+    align-items: center;
+}
+
+.service-add-btn{
+    color: white;
+    background: var(--app-red);
+    width: 100%;
+}
+
+.service-add-btn:hover{
+    background: #F94892;
+}
+
+.service-info-container{
+    background: var(--app-light);
+    /* padding: 30px 35px; */
+    width: 80%;
+    border-radius: 7px;
+    margin-left: 15px;
+    padding-top: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.service-info-container h1{
+    color: var(--app-red);
+}
+
+.service-info-container h2{
+    color: var(--app-blue);
+}
+
+.service-user-info{
+    display: flex;
+}
+
+.service-user-info h4{
+    padding-left: 15px;
+}
+
+.service-provider-about pre{
+    padding-top: 10px;
+    font-weight: normal;
+}
+
+@media screen and (max-width: 1400px) {
+    .box-container{
+        grid-template-columns: repeat(3,auto);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .box-container{
+        grid-template-columns: repeat(2,auto);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .box-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media screen  and (max-width: 1200px) {
+  
+
+    .service-container {
+        flex-direction: column;
+    }
+
+    .service-add{
+        margin-left: 15px;
+        width: 100%;
+    }
+
+    .service-info-container{
+        width: 100%;
+    }
+}

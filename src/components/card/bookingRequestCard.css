@@ -1,0 +1,44 @@
+.booking-request-card-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    width: 400px;
+    box-shadow: rgba(138, 135, 135, 0.35) 2px 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.booking-request-card-content{
+    padding: 25px;
+}
+
+.booking-request-card-btn-container{
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ccc;
+}
+
+
+
+.booking-request-card-btn-accept{
+    display: flex;
+    background: var(--app-red);
+    color: white;
+}
+
+.booking-request-card-btn-accept:hover{
+    background: #F94892;
+}
+
+
+.booking-request-card-btn-reject{
+    display: flex;
+    background: var(--app-blue);
+    color: white;
+}
+
+.booking-request-card-btn-reject:hover{
+    background: rgba(51, 118, 242,0.8);
+}
+

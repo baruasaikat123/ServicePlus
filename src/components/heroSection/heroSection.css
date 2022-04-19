@@ -1,0 +1,116 @@
+.hero-section-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 700px;
+    background: var(--app-light);
+    /* background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('../../images/service.png'); */
+}
+
+.hero-section-text {
+    padding-left: 150px;
+}
+
+.hero-section-text h1 {
+    font-size: 2.8rem;
+    margin-left: 10px;
+    color: rgb(235, 215, 215);
+    font-family: 'sans-serif';
+}
+
+.hero-section-text h2{
+    /* color:rgb(31, 210, 210); */
+    color: rgb(250, 185, 5);
+    margin-left: 10px;
+}
+
+
+.hero-section-text .hero-section-text-btn{
+    border-radius: 100px;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: var(--app-red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.hero-section-text .hero-section-text-btn:hover{
+    background: #F94892;
+}
+
+.hero-section-text span{
+    text-decoration: underline;
+    color: var(--app-blue);
+
+}
+
+
+.hero-section-pic{
+    display: flex;
+    flex-direction: column;
+    margin-right: 150px;
+    padding: 65px;
+}
+
+.hero-section-pic img{
+    height: 200px;
+    animation: MoveUpDown 3s linear infinite;
+    position: relative;
+}
+
+@keyframes MoveUpDown {
+    0%, 100% {
+      bottom: 0;
+    }
+    50% {
+      bottom: 30px;
+    }
+  }
+
+.hero-section-pic .hero-section-btn{
+    margin-top: 50px;
+    background: var(--app-blue); 
+    color: #fff;
+    width: 300px;
+    padding: 15px;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.hero-section-pic .hero-section-btn:hover{
+    background: rgb(63, 145, 238);
+}
+
+@media screen and (max-width: 950px) {
+    
+    .hero-section-container{
+        flex-direction: column;
+        height: 600px;
+        /* padding: 50px; */
+    }
+
+    .hero-section-pic{
+        order: -1;
+        padding: 55px;
+        margin-right: 0;
+    }
+
+    .hero-section-text{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 100px;
+        padding-left: 15px;
+        
+    }
+
+    .hero-section-text h1{
+        font-size: 1.9rem;
+        margin-left: 0px;
+    }
+}

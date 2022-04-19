@@ -1,0 +1,62 @@
+.select-box{
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+}
+
+.select-box .options-container{
+    background: #2f3640;
+    color: #f5f6fa;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.4s;
+    max-height: 0;
+    opacity: 0;
+    order: 1;
+}
+
+.selected {
+    background: #2f3640;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    color: #f5f6fa;
+    order: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.select-box .options-container.active{
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+}
+
+.select-box .options-container::-webkit-scrollbar{
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb{
+    background: #525861;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .option, .selected {
+    padding: 12px 24px;
+    cursor: pointer;
+}
+
+.select-box .option:hover{
+    background: #414b57;
+}
+
+.select-box label {
+    cursor: pointer;
+}
+
+.select-box .option .radio {
+    display: none;
+}
+
