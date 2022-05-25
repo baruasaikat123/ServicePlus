@@ -23,7 +23,6 @@ const Sidebar = () => {
                 ))}
             </div>
         </div>
-        
     )
 }
 

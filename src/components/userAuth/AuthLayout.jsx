@@ -4,9 +4,7 @@ import Mobile from "./mobileLogin/Mobile"
 import Signup from './signup/Signup'
 import ForgotPassword from "./forgotPassword/ForgotPassword"
 import googlePic from '../../images/google.png'
-import facebookPic from '../../images/fb.png'
-import { useDispatch } from "react-redux"
-import { googleAuth } from '../../redux/actions/authAction'
+//import facebookPic from '../../images/fb.png'
 
 const AuthLayout = ({
     login,
@@ -14,8 +12,6 @@ const AuthLayout = ({
     setMobile,
     forgotpassword,
     setForgotPassword }) => {
-    
-    const dispatch = useDispatch()
     
     return (
         <AuthContainer>
@@ -26,15 +22,14 @@ const AuthLayout = ({
             <AuthDivider><p>OR</p></AuthDivider>
             <AuthButtonOut
                 style={{ border: '2px solid black' }}
-                onClick = { () => dispatch(googleAuth())}
             >
                 <img src={googlePic} alt="google" />
                 Continue with Google
             </AuthButtonOut>
-            <AuthButtonOut style={{ color: 'white', background: 'rgb(66 103 178)' }}>
+            {/* <AuthButtonOut style={{ color: 'white', background: 'rgb(66 103 178)' }}>
                 <img src={facebookPic} alt="facebook" />
                 Continue with Facebook
-            </AuthButtonOut>
+            </AuthButtonOut> */}
         </AuthContainer>
   )
 }

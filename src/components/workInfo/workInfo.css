@@ -8,7 +8,7 @@
     box-shadow: rgba(138, 135, 135, 0.35) 2px 2px 8px;
     height: 350px;
     width: 310px;
-    margin: 20px;
+    margin-bottom: 35px;
     animation: 0.8 ease SlideFromDown;
 }
 

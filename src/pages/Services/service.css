@@ -1,3 +1,4 @@
+
 .box-container{
     display: grid;
     grid-template-columns: repeat(4,auto);
@@ -29,19 +30,41 @@
     display: flex;
     justify-content: space-between;
     padding: 35px 35px;
-
 }
 
 .service-add{
-    background: var(--app-light);
+    width: 400px;
     padding: 10px 15px;
-    width: 30%;
     height: 70px;
-    margin: 150px;
-    display: flex;
+    margin: 40px;
     border-radius: 7px;
-    align-items: center;
 }
+
+.service-additional-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    margin-left: 40px;
+    margin-top: 10px;
+    padding-left: 25px;
+    padding-top: 10px;
+    border: 1px solid;
+    border-radius: 7px;
+    color: rgb(118, 109, 109);
+}
+
+.card-pic{
+    width: 100%;
+}
+
+.booked-at{
+    font-family: 'EB Garamond', serif;
+    color: rgb(156, 149, 149);
+    font-weight: bold;
+    padding-top: 5px;
+}
+
 
 .service-add-btn{
     color: white;
@@ -49,26 +72,47 @@
     width: 100%;
 }
 
+.service-add-btn.disable{
+    background: #ccc;
+    cursor: auto;
+}
+
+.service-add-btn.disable:hover{
+    background: #ccc;
+}
+
 .service-add-btn:hover{
     background: #F94892;
 }
 
 .service-info-container{
-    background: var(--app-light);
-    /* padding: 30px 35px; */
-    width: 80%;
+    width: 55%;
     border-radius: 7px;
     margin-left: 15px;
-    padding-top: 20px;
-    padding-left: 35px;
-    padding-right: 35px;
+    border: 1px solid;
 }
 
-.service-info-container h1{
+.service-info-heading{
+    padding: 20px;
+}
+
+.service-user-info img{
+    height: 60px;
+    border-radius: 100px;
+}
+
+.service-detail-conatiner{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    padding: 20px;
+}
+
+.service-info-container h4{
     color: var(--app-red);
+    font-weight: bold;
 }
 
-.service-info-container h2{
+.service-info-container h3{
     color: var(--app-blue);
 }
 
@@ -80,10 +124,58 @@
     padding-left: 15px;
 }
 
+.service-provider-about{
+    padding: 20px;
+    border-bottom: 1px solid;
+}
+
+.service-feedback{
+    padding: 20px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
 .service-provider-about pre{
     padding-top: 10px;
     font-weight: normal;
+    color: #000;
 }
+
+.service-provider-about p{
+    font-size: 18px;
+    color: var(--app-blue);
+}
+.service-provider-about h4{
+    color: var(--app-red);
+    font-weight: bold;
+}
+
+
+.service-search-pincode{
+    color: rgb(104, 101, 101);
+    font-size: 17px;
+    margin-top: 12px;
+    padding-right: 15px;
+    cursor: pointer;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.service-search-pincode:hover{
+    text-decoration: underline;
+}
+
+.service-search-btn{
+    background: var(--app-red);
+    margin-left: 15px;
+    color: white;
+}
+
+.service-search-cancel{
+    margin-left: 15px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 1400px) {
     .box-container{
@@ -116,6 +208,19 @@
     }
 
     .service-info-container{
+        order: 1;
+        width: 100%;
+    }
+
+    .service-additional-info{
+        margin-left: 15px;
         width: 100%;
     }
 }
+
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+

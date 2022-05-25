@@ -7,11 +7,8 @@ import {
 } from './modalStyle'
 
 import AuthLayout from '../userAuth/AuthLayout'
-
 import { useState } from 'react'
-import { setModal } from '../../redux/actions/modalAction'
-import { useDispatch } from 'react-redux'
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../../contexts/AuthContext'
 
 const AppModal = () => {
     
@@ -24,8 +21,7 @@ const AppModal = () => {
         setMobile(false)
         setForgotPassword(false)
     }
-
-    const dispatch = useDispatch()
+    
     const { handleAuthModal } = useAuth()
     
     

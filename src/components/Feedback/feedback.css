@@ -1,0 +1,32 @@
+.text-area{
+    resize: none;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.feed-star{
+    color: #ccc;
+    cursor: pointer;
+}
+
+.feed-star.rating{
+    fill: rgb(255, 172, 18);
+}
+
+.feedback-modal-container{
+    width: 550px;
+    height: 340px;
+    margin-top: 60px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.feedback-modal-description{
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 35px;
+}

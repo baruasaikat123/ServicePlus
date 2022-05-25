@@ -1,21 +1,10 @@
 import { useEffect, useState } from "react"
 import { AuthButtonN, AuthInput, AuthText, AuthTextError } from "../authStyle"
 import validator from 'validator'
-import { useDispatch, useSelector } from "react-redux"
-import { forgotPassword, removeError } from "../../../redux/actions/authAction"
 
 const ForgotPassword = ({ setForgotPassword }) => {
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-
-        return () => {
-            dispatch(removeError())
-        }
-    }, [dispatch])
     
-    const user = useSelector((state) => state.loginUser)
     
     const [email, setEmail] = useState("")
     const [emailError, setEmailError] = useState(false)
@@ -53,24 +42,21 @@ const ForgotPassword = ({ setForgotPassword }) => {
     const handleSubmit = () => {
 
         const check = validateInputs()
-        if (!check) return
-        dispatch(forgotPassword(email))
     }
 
 
     return (
         <>
             <AuthTextError>
-                {user.error ? user.error : user.success}
+               
             </AuthTextError>
             <div>
                 <AuthInput
                     type="email"
-                    placeholder="Enter email *" 
+                    placeholder="Enter email *"
                     value={email}
                     onBlur={checkInputs}
                     onChange={(e) => setEmail(e.target.value)}
-                    disabled={user.loading && 'enable'}
                 />
                  <AuthTextError>
                     { emailError && emailErrorText }
@@ -81,10 +67,10 @@ const ForgotPassword = ({ setForgotPassword }) => {
                     <p style={{color: 'var(--app-blue)'}} onClick={ () => setForgotPassword(false) }>cancel</p>
                 </AuthText>
             <AuthButtonN
-                disabled={user.loading && 'enable'}
                 onClick = { handleSubmit }
             >
-                {user.loading ? <div className="loader" /> : 'Submit'}
+                Submit
+                {/* {user.loading ? <div className="loader" /> : 'Submit'} */}
             </AuthButtonN>
         </>
       

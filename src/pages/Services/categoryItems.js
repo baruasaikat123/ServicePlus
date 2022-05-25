@@ -3,7 +3,10 @@ import CleaningPic from '../../images/mop.png'
 import PlumberPic from '../../images/plumber.png'
 import ElectricianPic from '../../images/electrician.png'
 import MakeupArtistPic from '../../images/make-up-artist.png'
-import CookingPic from '../../images/cooking.png'
+import CookingPic from '../../images/chef.png'
+import PaintingPic from '../../images/paint-roller.png'
+import CarpenterPic from '../../images/carpenter.png'
+import RepairingPic from '../../images/air-conditioning.png'
 
 export const categoryItems = [
     {
@@ -32,17 +35,46 @@ export const categoryItems = [
         id: 'mk'
     },
     {
-        name: 'Cooking',
+        name: 'Personal Chef',
         pic: CookingPic,
         id: 'ck'
     },
+    {
+        name: 'Home Painting',
+        pic: PaintingPic,
+        id: 'hp'
+    },
+    {
+        name: 'Carpenter',
+        pic: CarpenterPic,
+        id: 'cp'
+    },
+    {
+        name: 'AC Repair',
+        pic: RepairingPic,
+        id: 'ac'
+    }
 ]
+//     {
+//         name: 'Daily Wage',
+//         pic: '',
+//         id: 'dw'
+//     },
+//     {
+//         name: 'Occasional Services',
+//         pic: '',
+//         id: 'os'
+//     }
+// ]
 
 export const categoryMap = {
-    'ed': 'Education',
-    'ck': 'Cooking Staff',
-    'el': 'Electrician',
-    'pl': 'Plumber',
-    'cl': 'Cleaning Staff',
-    'mk': 'Makeup Artist'
+    'Educator': 'ed',
+    'Electrician': 'el',
+    'Plumber': 'pl',
+    'Cleaning': 'cl',
+    'Makeup Artist': 'mk',
+    'Personal Chef': 'ck',
+    'Home Painting': 'hp',
+    'Carpenter': 'cp',
+    'AC Repair': 'ac'
 }

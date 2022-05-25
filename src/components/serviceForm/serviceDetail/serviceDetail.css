@@ -1,0 +1,15 @@
+.input-info textarea{
+    resize: none;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+
+.service-detail-container{
+    padding: 10px 50px;
+    margin-top: 20px;
+    color: rgb(150, 139, 139);
+}

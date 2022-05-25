@@ -1,0 +1,83 @@
+.add-service-component{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    z-index: 1;
+}
+.add-service-container{
+    width: 750px;
+    max-height: 500px; 
+    overflow-y: auto;
+    margin-top: 60px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.add-service-heading{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 55px;
+    padding-right: 30px;
+    padding-top: 25px;
+    border-bottom: 1px solid #ccc;
+}
+
+.add-service-close-btn{
+    cursor: pointer;
+}
+
+.add-service-container::-webkit-scrollbar{
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+}
+
+.add-service-container::-webkit-scrollbar-thumb{
+    background: #525861;
+    border-radius: 0 8px 8px 0;
+}
+
+.add-service-btn{
+    display: flex;
+    padding-bottom: 25px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 30px;
+    justify-content: space-between; 
+}
+
+.add-service-btn-prev.disable{
+    visibility: hidden;
+}
+
+.add-service-btn-prev{
+    display: flex;
+    user-select: none;
+    width: 100px;
+    justify-content: space-around;
+    align-items: center;
+    user-select: none;
+}
+
+.add-service-btn-prev:hover{
+    color: var(--app-red);
+}
+
+.add-service-btn-next{
+    background: rgb(59, 160, 242);
+    color: white;
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
+    align-items: center;
+    user-select: none;
+}
+
+.add-service-btn-next:hover{
+    background: rgba(59,160,242,0.8);
+}
+

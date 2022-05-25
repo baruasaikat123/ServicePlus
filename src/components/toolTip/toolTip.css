@@ -1,0 +1,9 @@
+.tooltip-container{
+    position: fixed;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 15px;
+    font-size: 13px;
+    border-radius: 18px;
+    color: white;
+    margin-top: 60px;
+}

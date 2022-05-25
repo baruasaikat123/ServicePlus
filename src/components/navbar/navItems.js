@@ -19,5 +19,4 @@ export const items = [
         title: 'Services',
         url: '/services/category'
     }
-    
 ]

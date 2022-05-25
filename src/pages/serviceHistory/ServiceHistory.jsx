@@ -1,86 +1,83 @@
 import React, { useEffect, useState } from 'react'
 import Loading from '../../components/Loading'
-import ServiceHistoryCard from '../../components/serviceHistoryCard/ServiceHistoryCard'
+import ServiceHistoryCard from './ServiceHistoryCard'
 import Sidebar from '../../components/sidebar/Sidebar'
 import './servicehistory.css'
 import { db } from '../../utils/init-firebase'
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore'
+import Profilebar from '../../components/profilebar/Profilebar'
+import Pagination from '../../components/pagination/Pagination'
+import { useAuth } from '../../contexts/AuthContext'
 
 const ServiceHistory = () => {
 
-    const [loading, setLoading] = useState(true)
+    const { currentUser } = useAuth()
+    
+    const [bookingDetails, setBookingDetails] = useState([])
     const [noData, setNoData] = useState(false)
-    const [serviceIds, setServiceIds] = useState([])
-    const [users, setUsers] = useState([])
+    const [pageNumber, setPageNumber] = useState(0)
+    const [loading, setLoading] = useState(true)
 
-    const fetchServiceHistory = async() => {
-        const id = '7SfuFjUAhfuPJxMtRxqc'
-        const ref = collection(db, 'service_history')
-        const q = query(ref, where('id', '==', id))
-
-        try {
-            const snap = await getDocs(q)
-            setLoading(false)
-            if (snap.docs.length > 0) {
-                const getIds = snap.docs.map(doc => ({
-                    data: doc.data().serviceId,
-                    id: doc.id
-                }))
-                setServiceIds(getIds[0].data)
-            }
-        }
-        catch (err) {
-            console.log(err.message);
-        }
-
+    const servicesPerPage = 9
+    const pagesVisited = pageNumber * servicesPerPage
+  
+    const displayBookings = bookingDetails
+    .slice(pagesVisited, pagesVisited + servicesPerPage)
+    .map((bd,key) => {
+        return <ServiceHistoryCard key={bd.id} bookings={bd} />
+    })
+  
+    const pageCount = Math.ceil(bookingDetails.length / servicesPerPage)
+    
+    const changePage = ({ selected }) => {
+      setPageNumber(selected)
     }
 
-    const fetchUsers = async () => {
+    useEffect(() => {
 
-        const ref = collection(db, 'user')
-        const qr = query(ref, where('__name__', 'in', serviceIds))
-        
-        try {
-            const snap = await getDocs(qr)
-            if (snap.docs) {
-                const getUsers = snap.docs.map(doc => ({
+        if(!currentUser) return
+
+        const ref = collection(db, 'booking_history')
+        const q = query(ref, where('serviceOwner', '==', currentUser.uid))
+
+        const unsubscribe = onSnapshot(q, snapshot => { 
+
+            if (snapshot.docs.length === 0) {
+                setNoData(true)
+            }
+            else {
+                const getData = snapshot.docs.map(doc => ({
                     data: doc.data(),
                     id: doc.id
                 }))
-
-                setUsers(getUsers)
+                
+                setBookingDetails(getData)
             }
-        }
-        catch (err) {
 
-            console.log(err.message);
-        }
-    }
+            setLoading(false)
+        })
+        
+        return () => unsubscribe()
 
-    useEffect(() => {
-       fetchServiceHistory()
-    }, [])
-
-    useEffect(() => {
-        fetchUsers()
-    },[serviceIds.length])
-    
-    console.log('id', serviceIds);
-    console.log('u', users);
+    }, [currentUser])
 
     return (
-        <div style={{ display: 'flex' }}>
+        <>
+            <Profilebar />
             <Sidebar />
-            {loading ? <div className='service-history-loader'><Loading /></div> :
-                noData ? <div className='service-history-no-data'><h4>Nothing to show here.🙁</h4></div> :
-                    <div className='service-history-container'>
-                        {users && users.map((user, key) => (
-                            <ServiceHistoryCard key={key} user={user}/>
-                        ))}
+            {loading ? <Loading /> : noData ? <h4>Nothing to show!☹️</h4> :
+                <>
+                    <div className="my-service-box-container">
+                        {displayBookings}
                     </div>
+                    <div className="fav-services-pagination-container">
+                        <Pagination changePage={changePage} pageCount={pageCount} />
+                    </div>
+                </>
             }
-        </div>
+        </>
     )
 }
 
 export default ServiceHistory
+  

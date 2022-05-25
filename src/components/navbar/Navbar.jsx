@@ -4,36 +4,39 @@ import { items } from './navItems'
 import { useEffect, useState } from 'react'
 import AppModal from '../modal/AppModal'
 import { APP_NAME } from '../../constants'
-import { useDispatch, useSelector } from 'react-redux'
-import { setModal } from '../../redux/actions/modalAction'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import './navbar.css'
 import { ButtonN } from '../../style'
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../../contexts/AuthContext'
+import Loading from '../Loading'
 
 const Navbar = () => {
 
-    //const [openModal, setOpenModal] = useState(false)
+    const { currentUser, logout, authModalClick, handleAuthModal } = useAuth()
+
     const [mobileClick, setMobileClick] = useState(false)
-    //const modalValue = useSelector((state) => state.modalValue)
-    const dispatch = useDispatch()
-    const {authModalClick, handleAuthModal} = useAuth()
+
+    //const [loading, setLoading] = useState(true)
+  
 
     const closeMobileMenu = () => {
         setMobileClick(false)
     }
 
-    useEffect(() => {
-        document.title = 'ServicePlus'
-    },[authModalClick])
+   
 
+    // useEffect(() => {
+    //     document.title = 'ServicePlus'
+    // }, [authModalClick])
+    
+    //const [loading, setLoading] = useState(false)
 
     return (
         <>
             {authModalClick && <AppModal/>}
 
-            <div className='navbar'>
-                <div className='navbar-container container'>
+            <div className='app-navbar'>
+                <div className='app-navbar-container'>
                     <Link to="/" className='navbar-logo'>
                         {APP_NAME}
                         <img src={ Logo } alt="logo" className='navbar-icon'/>
@@ -51,9 +54,14 @@ const Navbar = () => {
                             )
                         })}
 
-                        <Link className='nav-btn-link'>
+                        {!currentUser && <div className='nav-btn-link'>
                             <ButtonN className='nav-btn' onClick={() => handleAuthModal(true)}>Register/Login</ButtonN>
-                        </Link>
+                        </div>}
+
+                        {currentUser && <div className='nav-btn-link'>
+                            <ButtonN className='nav-btn' onClick={logout}>Logout</ButtonN>
+                        </div>}
+                        
                     </ul>
                 
                 </div>

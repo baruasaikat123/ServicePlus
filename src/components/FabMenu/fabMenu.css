@@ -1,0 +1,13 @@
+.fab-menu-container{
+    background: var(--app-red);
+    display: flex;
+    margin-left: 20px;
+    position: fixed;
+    padding: 15px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.tool-tip{
+    margin-top: 50px;
+}

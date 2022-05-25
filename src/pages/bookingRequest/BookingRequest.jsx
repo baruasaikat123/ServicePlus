@@ -7,7 +7,7 @@ import { db } from '../../utils/init-firebase'
 import { useEffect } from 'react'
 import Loading from "../../components/Loading"
 import RequestModal from '../../components/serviceRequest/RequestModal'
-import { useAuth } from '../../contexts/authContext'
+import { useAuth } from '../../contexts/AuthContext'
 
 const BookingRequest = () => {
 
@@ -21,38 +21,33 @@ const BookingRequest = () => {
     const [rejectClick, setRejectClick] = useState(false)
     const [documentId, setDocumentId] = useState('')
     
-    const id = '7SfuFjUAhfuPJxMtRxqc'
-    const fetchRequests = async () => {
-        const docRef = collection(db, 'service_request')
-        const q = query(docRef, where('id', '==', id))
+    const fetchRequests =  () => {
+        const docRef = doc(db, 'services',)
+        const q = query(docRef, where('', '==', ))
       
-        try {
-            const docSnap = await getDocs(q)
-            console.log(docSnap.docs.length);
-            setLoading(false)
-            if (docSnap.docs.length > 0) {
+        //try {
+            // const docSnap = await getDocs(q)
+            // //console.log(docSnap.docs.length);
+            // setLoading(false)
+            // if (docSnap.docs.length > 0) {
                 
-                if (docSnap.docs[0].data().requestId.length > 0) {
-                    const getRequests = docSnap.docs.map(doc => ({
-                        data: doc.data().requestId,
-                        id: doc.id
-                    }))
-                    setRequests(getRequests[0].data)
-                    setDocumentId(getRequests[0].id)
-                }
-                else {
-                    setNodata(true)
-                }
+            //     if (docSnap.docs[0].data().requestId.length > 0) {
+            //         const getRequests = docSnap.docs.map(doc => ({
+            //             data: doc.data().requestId,
+            //             id: doc.id
+            //         }))
+            //         setRequests(getRequests[0].data)
+            //         setDocumentId(getRequests[0].id)
+            //     }
+            //     else {
+            //         setNodata(true)
+            //     }
                
-            }
-            else {
-                setNodata(true)
-            }
-            
-        }
-        catch (err) {
-            console.log(err.message);
-        }
+            // }
+            // else {
+            //     setNodata(true)
+            // }
+        
     }
 
     const fetchUsers = async () => {

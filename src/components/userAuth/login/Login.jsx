@@ -1,23 +1,17 @@
 import { AuthButtonN, AuthInput, AuthText, AuthTextError } from "../authStyle"
 import { useEffect, useState } from "react"
 import validator from 'validator'
-import { useSelector, useDispatch } from "react-redux"
-import { loginUser, removeError } from "../../../redux/actions/authAction"
+import { useAuth } from "../../../contexts/AuthContext"
+import useMounted from "../../../hooks/useMounted"
 
 const Login = ({ setMobile, setForgotPassword }) => {
 
-    const dispatch = useDispatch()
     document.title = 'Login here'
 
-    useEffect(() => {
-        
-        return () => {
-            dispatch(removeError())
-        }
-    }, [dispatch])
-    
+  
 
-    const user = useSelector((state) => state.loginUser)
+    const { login, handleAuthModal } = useAuth()
+    const mounted = useMounted()
     
     const initialValue = { email: "", password: "" }
     const [userValues, setUserValues] = useState(initialValue)
@@ -28,10 +22,13 @@ const Login = ({ setMobile, setForgotPassword }) => {
         setUserValues({...userValues, [name]:value})
     }
 
+    const [loading, setLoading] = useState(false)
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
     const [emailErrorText, setEmailErrorText] = useState('')
     const [passwordErrorText, setPasswordErrorText] = useState('')
+    const [loginError, setLoginError] = useState(false)
+    const [loginErrorText, setLoginErrorText] = useState('')
 
     const { email, password } = userValues
     
@@ -79,53 +76,61 @@ const Login = ({ setMobile, setForgotPassword }) => {
         const check = validateInputs()
 
         if (check) {
-            dispatch(loginUser(email,password))
+            setLoading(true)
+            login(email, password)
+                .then(() => {
+                    handleAuthModal(false)
+                })
+                .catch(err => {
+                    setLoginError(true)
+                    setLoginErrorText(err.code)
+                })
+            .finally(() =>  mounted.current && setLoading(false))
         }
+
     }
 
     return (
         <>
             <AuthTextError>
-                {user.error}
+               {loginError && loginErrorText}
             </AuthTextError>
-            <div>
-                <AuthInput
-                    name='email'
-                    type="email"
-                    value={userValues.email}
-                    onChange={handleChange}
-                    onBlur={checkInputs}
-                    disabled={user.loading && 'enable'}
-                    placeholder="Enter email *" 
-                />
-                <AuthTextError>
-                    { emailError && emailErrorText }
-                </AuthTextError>
-            </div>
-            <div>
-                <AuthInput
-                    name='password'
-                    type="password"
-                    placeholder="Enter password *"
-                    value={userValues.password}
-                    onChange={handleChange}
-                    onBlur={checkInputs}
-                    disabled={user.loading && 'enable'}
-                />
-                <AuthTextError>
-                    { passwordError && passwordErrorText }
-                </AuthTextError>
-            </div>
-         
-            <AuthText>
-                <p style={{color: 'var(--app-blue)'}}onClick={ () =>  setForgotPassword(true) }>Forgot Password ?</p>
-                <p style={{color: 'var(--app-red)'}} onClick={() => setMobile(true)}>Continue using mobile</p>
-            </AuthText>
-            <AuthButtonN
-                disabled={user.loading && 'enable'}
-                onClick={ handleLoginUser }>
-                {user.loading ? <div className="loader" /> : 'Login'}
-            </AuthButtonN>
+            
+                <div>
+                    <AuthInput
+                        name='email'
+                        type="email"
+                        value={userValues.email}
+                        onChange={handleChange}
+                        onBlur={checkInputs}
+                    
+                        placeholder="Enter email *" 
+                    />
+                    <AuthTextError>
+                        { emailError && emailErrorText }
+                    </AuthTextError>
+                </div>
+                <div>
+                    <AuthInput
+                        name='password'
+                        type="password"
+                        placeholder="Enter password *"
+                        value={userValues.password}
+                        onChange={handleChange}
+                        onBlur={checkInputs}    
+                    />
+                    <AuthTextError>
+                        { passwordError && passwordErrorText }
+                    </AuthTextError>
+                </div>
+                <AuthText>
+                    <p style={{color: 'var(--app-blue)'}}onClick={ () =>  setForgotPassword(true) }>Forgot Password ?</p>
+                    <p style={{color: 'var(--app-red)'}} onClick={() => setMobile(true)}>Continue using mobile</p>
+                </AuthText>
+                <AuthButtonN onClick={ handleLoginUser } >
+                    {loading ? <div className="loader" /> : 'Login'}
+                </AuthButtonN>
+            
         </>
     )
 }

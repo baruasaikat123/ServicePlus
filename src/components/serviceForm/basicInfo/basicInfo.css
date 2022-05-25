@@ -1,0 +1,16 @@
+.basic-info-container{
+    padding: 10px 50px;
+    margin-top: 20px;
+    color: rgb(150, 139, 139);
+}
+
+.select-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 750px) {
+    .select-info{
+        flex-direction: column;
+    }
+}

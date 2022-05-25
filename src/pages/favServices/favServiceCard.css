@@ -1,0 +1,82 @@
+.fav-service-card-container{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid var(--app-light);
+    box-shadow: rgba(138, 135, 135, 0.35) 2px 2px 8px;
+    border-radius: 8px;
+    width: 380px;
+    position: inherit;
+}
+
+.fav-service-card-pic{
+    border-bottom: 1px solid #ccc;
+}
+
+.fav-service-card-body{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.fav-service-card-profile{
+    display: flex; 
+    padding: 10px 0px;  
+    justify-content: space-between;
+}
+
+.fav-service-card-description{
+    padding: 15px 0px;
+}
+
+.fav-service-card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+}
+
+
+.fav-service-card-footer h4{
+    color: #ccc;
+    margin-top: 37px;
+}
+
+.fav-service-card-rating{
+    display: flex;
+    user-select: none;
+}
+
+.fav-service-rating-logo{
+    margin-right: 5px;
+    fill: rgb(255, 172, 18);
+}
+
+.fav-service-card-rating p{
+    color: rgb(255,172,18);
+}
+
+.fav-service-card-rating span{
+    padding-left: 5px;
+    color: #ccc;
+}
+
+.fav-service-fav-logo{
+    fill: #ccc;
+    cursor: pointer;
+}
+
+.fav-service-fav-logo-active{
+    fill: red;
+    cursor: pointer;
+}
+
+.fav-service-icon-available{
+    fill: green;
+}
+
+.fav-service-icon-notavailable{
+    fill: red;
+}
+

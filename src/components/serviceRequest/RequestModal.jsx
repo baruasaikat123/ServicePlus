@@ -1,82 +1,144 @@
 import './requestmodal.css'
-import { ButtonN, Input } from '../../style'
-import { collection, onSnapshot, where, query, doc, deleteDoc, updateDoc, arrayRemove, addDoc, arrayUnion, getDocs } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { ButtonN } from '../../style'
+import { doc, updateDoc, arrayRemove, collection, addDoc, arrayUnion } from 'firebase/firestore'
 import { db } from '../../utils/init-firebase'
+import { useEffect, useState } from 'react'
+import Loading from '../Loading'
+import { useAuth } from '../../contexts/AuthContext'
 
-const RequestModal = ({ acceptClick, setAcceptClick, setRejectClick, id, rid, requests }) => {
+const RequestModal = ({
+    acceptClick,
+    setAcceptClick,
+    setRejectClick,
+    serviceId,
+    rid,
+    deliveryDate}) => {
 
+    const [loading, setLoading] = useState(false)
+    const [click, setClick] = useState(false)
+    const [reasonText, setReasonText] = useState('')
+
+    const { rejectNo, deliveryLocation, currentUser  } = useAuth()
+
+    console.log(rejectNo ? rejectNo : 1)
    
-
     const handleRequests = () => {
-   
-        const ref = doc(db, 'service_request', id)
+
+        if (!acceptClick && !reasonText) {
+            alert('specify reason first')
+            return
+        }
+        
+        const ref = doc(db, 'services', serviceId)
+
+
+        setLoading(true)
 
         updateDoc(ref, {
-            requestId: arrayRemove(rid)
-        })
-            .then(() => {
-                console.log('deleted')
-                fun()
-                
-                requests.splice(requests.indexOf(rid), 1)
-                if (acceptClick) setAcceptClick(false)
-                else setRejectClick(false)
-        })
-            .catch(err => console.log(err.message))   
-
-    }
-
-    const fun = async () => {
-
-        const serviceRef = collection(db, 'service_history')
-        const q = query(serviceRef, where('id', '==', '7SfuFjUAhfuPJxMtRxqc'))
-        
-        const snap = await getDocs(q)
-
-        if (snap.docs.length > 0) {
-            console.log('yes');
-            updateDoc(doc(db,'service_history', snap.docs[0].id), {
-                serviceId: arrayUnion(rid)
+          
+            requests: arrayRemove({
+                requestId: rid,
+                location: deliveryLocation,
+                bookingDay: deliveryDate
             })
-                .then(() => console.log('update successfully'))
-            .catch((err) => console.log(err.message))
-        }
-
-        else {
-            addDoc(serviceRef, {
-                id: '7SfuFjUAhfuPJxMtRxqc',
-                serviceId: arrayUnion(rid)
-            })
-                .then((res) => {
-                    console.log('added successfully')
+        })
+        .then(() => {
+            if (acceptClick) {
+                updateBooking()
+                setAcceptClick(false)
+            }
+            else {
+                updateDoc(ref,{
+                    rejectNo: rejectNo ? rejectNo +1 : 1
                 })
-            .catch((err) => console.log(err.message))
+                setRejectClick(false)
+            }
+        })
+         .catch(err => console.log(err.message))  
+        .finally(() => setLoading(false))
+    }
+
+
+    const updateBooking = () => {
+
+        const ref = collection(db, 'booking_history')
+
+        addDoc(ref, {
+            bookedBy: rid,
+            bookedFor: serviceId,
+            bookedOn: new Date(),
+            deliveryOn: deliveryDate,
+            location: deliveryLocation,
+            phoneNumber: '8597460589',
+            confirm: true,
+            serviceOwner: currentUser.uid
+        }).then(() => console.log('added'))
+            .catch(err => console.log(err.code))
+        
+        const docRef = doc(db, 'users', rid)
+        
+        updateDoc(docRef, {
+            bookingId: arrayUnion(serviceId)
+        }).then(() => console.log('updated'))
+        .catch(err => console.log(err.code))
+    }
+
+    useEffect(() => {
+        if (click) handleRequests()
+        
+        return () => setClick(false)
+    }, [click])
+    
+    useEffect(() => {
+        if (new Date() === deliveryDate) {
+            const ref = collection(db, 'booking_history')
+            updateDoc(ref, {
+                requests: arrayRemove({
+                    requestId: rid,
+                    location: deliveryLocation,
+                    bookingDay: deliveryDate
+                })
+            })
+            .then(() => {
+          
+                updateDoc(ref,{
+                    rejectNo: rejectNo ? rejectNo +1 : 1
+                })
+                setRejectClick(false)
+                
+            })
+            .catch(err => console.log(err.message))  
+            .finally(() => setLoading(false))
         }
 
-    }
+    },[])
 
     
     return (
         <div className='request-modal-component'>
-            <div className={acceptClick ? 'request-modal-container' : 'request-modal-container reject'}>
+           {loading ? <Loading /> :  <div className={acceptClick ? 'request-modal-container' : 'request-modal-container reject'}>
                 <div className="request-modal-description">
-                    {acceptClick ? <h4>Before proceeding make sure you are avaiable at this specific date and time.</h4>
+                    {acceptClick ? <p style={{fontSize: '18px', fontWeight: 'bold'}}>Before proceeding make sure you are avaiable at this specific date and time.</p>
                         :
                         <>
-                            <h4>Specify the reason</h4>
-                            <textarea style={{height: '80px', width: '100%', padding: '15px'}}/>
+                            <p style={{fontWeight: 'bold', fontSize: '18px'}}>Specify the reason:</p>
+                            <textarea 
+                                value={reasonText}
+                                rows={4}
+                                style={{ marginTop: '10px', width: '100%', padding: '10px', resize: 'none', borderRadius: '8px', fontSize: '17px' }} 
+                                onChange={(e) => setReasonText(e.target.value)}
+                            />
                         </>
                     }
                 </div>
                 <div className="request-modal-btn">
                     <ButtonN
-                        onClick={ handleRequests }
+                        onClick={ () => setClick(true) }
                         className='request-modal-btn-ok'>{acceptClick ? 'Yes, I am sure' : 'Yes, I want to Reject'}</ButtonN>
                     <ButtonN onClick={ acceptClick ? () => setAcceptClick(false) : () => setRejectClick(false)}
                         className='request-modal-btn-cancel'>Cancel</ButtonN>
                 </div>
-            </div>
+            </div>}
         </div>
         
     )

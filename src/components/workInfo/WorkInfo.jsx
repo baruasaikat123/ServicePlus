@@ -17,7 +17,7 @@ const WorkInfo = ({ item }) => {
         />
       </div>
       <div className='work-info-heading'>
-        <h3>{item.heading}</h3>
+        <h5>{item.heading}</h5>
         <p>{item.description}</p>
       </div>
     </div>

@@ -7,97 +7,97 @@ import { useEffect, useState } from 'react'
 import { db } from '../../utils/init-firebase'
 import { doc, updateDoc, arrayRemove, arrayUnion, getDoc } from 'firebase/firestore'
 import { useParams } from 'react-router-dom'
-import Loading from '../Loading'
+import { useAuth } from '../../contexts/AuthContext'
+import ProfilePic from '../../images/my.jpg'
+import ServicePic from '../../images/default.png'
 
-const ServiceCard = ({ index, favs, mp , id, user }) => {
+const ServiceCard = ({ service }) => {
 
+  const { favMap } = useAuth()
   const [favClick, setFavClick] = useState(false)
-  //let favClick = false
-  //if(mp.get(id)) favClick = true
-  const { name, rating, price, serviceAbout, status, totalRating, gender } = user.data
+  const [addFav, setAddFav] = useState(false)
+  const { category, gender, displayName, experience, fees, location, serviceDetail, serviceInfo, status, totalRating} = service.data
   const history = useHistory()
   const params = useParams()
   const categoryId = params.categoryId
 
-  //const userCollectionRef = collection(db, 'service_require').doc('misODt2jBBNHdWhvFKrRYKXbSI62')
-  
-  useEffect(() => {
-    if(mp.get(id)) setFavClick(true)
-  },[mp.get(id)===true])
-
-  //console.log(mp.get(id), id, favClick);
   const addToFav = () => {
-    const userCollectionRef = doc(db, 'service_require','misODt2jBBNHdWhvFKrRYKXbSI62')
-    
-    if (!mp.get(id)) {
-      updateDoc(userCollectionRef, {
-        fav: arrayUnion(id)
-      }
-      ).then((res) => {
-        setFavClick(!favClick)
-        //favClick = true
-        //console.log('id',mp.get(id))
-        //mp.set(id, true)
-        //console.log('change',mp.get(id));
-      }).catch(err => console.log(err.message))
+    const ref = doc(db, 'users', currentUser.uid)
+    if (!favClick) {
+      updateDoc(ref, {
+        fav:arrayUnion(service.id)
+      }).then(() => {
+        setFavClick(true)
+        console.log('added')
+      })
+      .catch(err => console.log(err.code))
     }
 
     else {
-      updateDoc(userCollectionRef, {
-        fav: arrayRemove(id)
-      }
-      ).then((res) => {
-        setFavClick(!favClick)
-        favs.splice(index, 1)
-        console.log('change',favs);
-        //favClick = false
-        //mp.set(id, false)
-      }).catch(err => console.log(err.message))
+      updateDoc(ref, {
+        fav:arrayRemove(service.id)
+      }).then(() => {
+        setFavClick(false)
+        console.log('remove')
+      })
+      .catch(err => console.log(err.code))
+    }
+  }
+
+  useEffect(() => {
+
+    if (addFav) addToFav()
+    
+    return () => setAddFav(false)
+
+  },[addFav])
+  
+  useEffect(() => {
+    if(favMap.get(service.id)) setFavClick(true)
+  },[favMap.get(service.id)])
+
+
+  const { currentUser, handleAuthModal } = useAuth()
+
+  const check = () => {
+    if (currentUser) {
+      history.push(`/services/category/${categoryId}/${service.id}`)
+    }
+    else {
+      handleAuthModal(true)
     }
   }
 
 
-  //const [check, setCheck] = useState(false)
-
-  // useEffect(() => {
-  //   for (let i = 0; i < favs.length; i++){
-      
-  //     if (favs[i] === id) {
-  //       setCheck(true)
-  //       break
-  //     }
-  //   }
-  // }, [])
-  
-  //console.log('mp', mp.get(id));
-
-
   return (
-    <div className="card-container">
+    <div className="service-card-container">
       <div className="card-pic">
-        <img alt={'service-pic'} />
+        <img src={ ServicePic } alt={'service-pic'} />
       </div> 
-      <div className="card-body" onClick={() => history.push(`/services/category/${categoryId}/${id}`)}>
-        <div className="card-profile">
-          <img alt={'profile-pic'} />
-          <p>{name}
-            <GoPrimitiveDot className={status === 'Available' ? 'icon-available' : 'icon-notavailable'} />
-          </p>
-          <p style={{color: '#ccc'}}>{ status }</p>
+      <div className="service-card-body" onClick={check}>
+        <div className="service-card-profile">
+          <img src={ProfilePic} alt={'profile-pic'} />
+          <p>{displayName}</p>
+          <GoPrimitiveDot className={status === 'A' ? 'icon-available' : 'icon-notavailable'} />
         </div>    
-        <div className="card-description">
-          <p>{ serviceAbout }</p>
+        <div className="service-card-description">
+          <p>{ serviceInfo }</p>
         </div>  
         <div className='card-rating'>
           <BsFillStarFill className='rating-logo' />
-          <p>{ rating }<span>({ totalRating})</span></p>
+          <p>{ totalRating.avgRating }<span>({ totalRating.totalNoUser})</span></p>
         </div>
       </div>  
-      <div className="card-footer">
-        <AiFillHeart
-          onClick={ addToFav }
-          className={ favClick ? 'fav-logo-active' : 'fav-logo'} />
-        <h4>STARTING AT<pre>&nbsp;&nbsp;&nbsp;&nbsp;&#x20B9;&nbsp;{ price }</pre></h4>
+      <div className="service-card-footer">
+        {currentUser ? 
+          <>
+            <AiFillHeart
+              onClick={() => setAddFav(true) }
+              className={favClick ? 'card-fav-logo-active' : 'card-fav-logo'} />
+            
+            <h5>&#x20B9;&nbsp;{ fees }</h5>
+          </> : <h5>Register to view</h5>
+        }
       </div>  
     </div>
   )

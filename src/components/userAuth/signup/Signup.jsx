@@ -1,26 +1,18 @@
-import { useEffect, useState } from "react"
-//import { useDispatch, useSelector } from "react-redux"
-//import { registerUser, removeError } from "../../../redux/actions/authAction"
+import { useState } from "react"
 import { AuthButtonN, AuthInput, AuthText, AuthTextError } from "../authStyle"
 import validator from 'validator'
-import { useAuth } from "../../../contexts/authContext"
+import { useAuth } from "../../../contexts/AuthContext"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import useMounted from "../../../hooks/useMounted"
+import { addDoc, collection, doc, setDoc } from "firebase/firestore"
+import { db } from "../../../utils/init-firebase"
 
 const Signup = ({ setMobile }) => {
 
     const [isLoading, setIsLoading] = useState(false)
     const history = useHistory()
-    //const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     document.title = 'Signup here'
-
-    //     return () => {
-    //         dispatch(removeError())
-    //     }
-    // },[dispatch])
- 
-    //const user = useSelector((state) => state.registerUser)
+    
+    const mounted = useMounted()
 
     const initialValue = { email: "", password: "" }
     const [userValues, setUserValues] = useState(initialValue)
@@ -89,16 +81,18 @@ const Signup = ({ setMobile }) => {
     const handleRegisterUser = () => {
 
         if (validateInputs()) {
-            //dispatch(registerUser(email,password))
             setIsLoading(true)
             register(email, password)
-                .then(() => {
+                .then((res) => {
                     handleAuthModal(false)
+                    console.log(res.user.uid)
+                    const ref = doc(db,'users',res.user.uid)
+                    setDoc(ref, {})
                     history.push('/dashboard')
                 }).catch((err) => {
                     setErrorMsg(err.code)
                 }).finally(() => {
-                     setIsLoading(false)
+                    mounted.current && setIsLoading(false)
                 })
         }
     }

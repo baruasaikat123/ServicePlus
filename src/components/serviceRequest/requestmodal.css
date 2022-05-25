@@ -5,14 +5,14 @@
     display: flex;
     background-color: rgba(0,0,0,0.4);
     justify-content: center;
-    z-index: 1;
+    z-index: 3;
 }
 
 
 
 .request-modal-container{
-    width: 500px;
-    height: 180px;
+    width: 550px;
+    height: 250px;
     margin-top: 60px;
     border-radius: 12px;
     background-color: white;
@@ -20,14 +20,13 @@
 }
 
 .request-modal-container.reject{
-    height: 250px;
+    height: 340px;
 }
 
 .request-modal-description{
     padding-left: 35px;
     padding-right: 35px;
     padding-top: 35px;
-    padding-bottom: 20px;
 }
 
 .request-modal-btn{
@@ -37,6 +36,13 @@
 
 .request-modal-btn-ok{
     background: var(--app-color);
+    padding: 15px 20px;
+    margin-top: 25px;
+}
+
+.request-modal-btn-cancel{
+    padding: 15px 20px;
+    margin-top: 25px;
 }
 
 .request-modal-btn-ok:hover{

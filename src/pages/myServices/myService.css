@@ -1,0 +1,65 @@
+.my-service-main{
+    display: flex;
+    /*background: rgb(102, 193, 232);*/
+}
+
+.my-service-fab-menu{
+    position: absolute;
+    margin-top: 400px;
+    margin-left: 85%;
+
+}
+
+.my-service-not-added{
+    color: #ccc;
+    padding:100px;
+    margin-top: 100px;
+    margin-left: 30%;
+    font-size: 45px;
+}
+
+@media screen and (max-width: 750px) {
+    .my-service-fab-menu{
+        margin-left: 70%;
+    }
+}
+
+.my-service-box-container{
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    grid-gap: 20px;
+    list-style: none;
+    justify-content: center;
+    padding-top: 50px;
+    padding-left: 65px;
+    margin-left: 15%;
+}
+
+.my-service-loading{
+    margin-left: 45%;
+    margin-top: 100px;
+}
+
+.my-service-pagination-container{
+    display: flex;
+    justify-content: center;
+}
+
+.my-service-dlt-btn:hover{
+    color: var(--app-red)
+}
+
+@media screen and (max-width: 1400px) {
+    .my-service-box-container{
+        grid-template-columns: repeat(2,auto);
+        margin-left: 20%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .my-service-box-container{
+        display: flex;
+        flex-direction: column;
+        margin-left: 0%;
+    }
+}

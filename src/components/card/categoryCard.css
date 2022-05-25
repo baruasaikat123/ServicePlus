@@ -13,8 +13,10 @@
     cursor: pointer;
 }
 
-.category-container h4{
+.category-container p{
     padding-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .category-container:hover{

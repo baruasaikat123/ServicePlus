@@ -1,0 +1,95 @@
+.profilebar{
+    width: 100vw;
+    /* background: #7c94ea; */
+    background: lightseagreen;
+    border-bottom: 1px solid #ccc;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.profilebar-container{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 100%;
+    max-width: 1300px;
+}
+
+.profilebar-item-menu{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.profilebar-icon{
+    height: 35px;
+    margin-top: 20px;
+}
+
+.profilebar-item {
+    display: flex;
+    height: 60px;
+    padding: 10px;
+}
+
+.profilebar-item-links{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem 20px;
+    height: 100%;
+    margin-top: 10px;
+    font-size: 17px;
+    color: white;
+}
+
+.profilebar-item-container{
+    margin-top: 20px;
+}
+
+.profilebar-item-container img{
+    width: 40px;
+    cursor: pointer;
+}
+
+.profilebar-dropdown{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    width: 150px;
+    align-items: center;
+    background: var(--app-light);
+    box-shadow: rgba(138, 135, 135, 0.35) 2px 2px 8px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 5;
+    margin-top: 50px;
+    right: 20px;
+}
+
+.profilebar-dropdown-item{
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    color: #1c2237;
+    font-size: 17px;
+}
+
+.profilebar-dropdown-item:hover{
+    background: #ccc;
+}

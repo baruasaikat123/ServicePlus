@@ -1,0 +1,99 @@
+.my-service-card-container{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: rgba(138, 135, 135, 0.35) 2px 2px 8px;
+    border-radius: 8px;
+    width: 380px;
+    position: inherit;
+}
+
+.my-service-card-body{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.my-service-card-profile{
+    display: flex; 
+    padding: 10px 0px;  
+    justify-content: space-between;
+}
+
+.my-service-card-description{
+    padding: 15px 0px;
+}
+
+.my-service-card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+}
+
+
+.my-service-card-footer h4{
+    color: var(--app-red);
+    margin-top: 20px;
+    padding: 10px;
+    background: var(--app-light);
+    border-radius: 10px;
+}
+
+.my-service-card-footer h4 span{
+    color: var(--app-blue);
+}
+
+.my-service-card-info{
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+    padding: 5px;
+}
+
+.my-service-card-info h4{
+    color: var(--app-blue);
+}
+
+.my-service-card-info span{
+    color: #ccc;
+}
+
+.my-service-card-rating{
+    display: flex;
+}
+
+.my-service-rating-logo{
+    margin-right: 5px;
+    margin-top: 3px;
+    fill: rgb(255, 172, 18);
+}
+
+.my-service-dlt-btn{
+    cursor: pointer;
+    background: var(--app-light);
+    padding: 7px 8px;
+    border-radius: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.my-service-card-rating p{
+    color: rgb(255,172,18);
+}
+
+.my-service-card-rating span{
+    padding-left: 5px;
+    color: #ccc;
+}
+
+.my-service-status-btn{
+    /* background: rgb(96, 142, 240); */
+    background: var(--app-red);
+    color: white;
+}
+
+
+

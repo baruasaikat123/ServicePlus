@@ -1,31 +1,30 @@
 .hero-section-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 700px;
-    background: var(--app-light);
-    /* background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('../../images/service.png'); */
+    height: 600px;
+    z-index: 999;
+    color: #fff;
+    /*background-size: cover;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.5)),url('../../images/temp.jpg'); */
 }
 
-.hero-section-text {
+.hero-section-text-container {
     padding-left: 150px;
 }
 
-.hero-section-text h1 {
+.hero-section-text-container h1 {
     font-size: 2.8rem;
     margin-left: 10px;
-    color: rgb(235, 215, 215);
+    color: #fff;
     font-family: 'sans-serif';
 }
 
-.hero-section-text h2{
+.hero-section-text-container h2{
     /* color:rgb(31, 210, 210); */
     color: rgb(250, 185, 5);
     margin-left: 10px;
 }
 
 
-.hero-section-text .hero-section-text-btn{
+.hero-section-text-container .hero-section-text-btn{
     border-radius: 100px;
     padding-left: 35px;
     padding-right: 35px;
@@ -38,11 +37,11 @@
     user-select: none;
 }
 
-.hero-section-text .hero-section-text-btn:hover{
+.hero-section-text-container .hero-section-text-btn:hover{
     background: #F94892;
 }
 
-.hero-section-text span{
+.hero-section-text-cotainer span{
     text-decoration: underline;
     color: var(--app-blue);
 
@@ -56,10 +55,16 @@
     padding: 65px;
 }
 
-.hero-section-pic img{
+.hero-section-pic .hero-section-text{
     height: 200px;
     animation: MoveUpDown 3s linear infinite;
     position: relative;
+}
+
+.hero-section-text h1{
+    color: rgb(15, 203, 182);
+    font-size: 40px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 @keyframes MoveUpDown {

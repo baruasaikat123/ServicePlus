@@ -5,23 +5,23 @@ export const items = [
         id: 1
     },
     {
+        name: 'My Services',
+        url: '/create-services',
+        id: 2,
+    },
+    {
         name: 'Favourites Services',
         url: '/favourite-services',
-        id: 2
+        id: 3,
     },
     {
         name: 'My Booking Details',
         url: '/booking-detail',
-        id: 3
-    },
-    {
-        name: 'My Service Request',
-        url: '/booking-request',
-        id: 3
+        id: 4,
     },
     {
         name: 'My Service History',
         url: '/service-history',
-        id: 4
+        id: 5,
     },
 ]

@@ -1,0 +1,39 @@
+.dlt-modal-wrapper{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    z-index: 2;
+}
+
+.dlt-modal-description{
+    padding: 35px;
+}
+.dlt-modal-btn{
+    display: flex;
+    padding: 10px 35px;
+    justify-content: space-between;
+}
+.dlt-modal-container{
+    width: 500px;
+    height: 180px;
+    margin-top: 60px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.dlt-modal-btn-accept{
+    background: rgb(51, 128, 228);
+    color: white;
+}
+
+.dlt-modal-btn-accept:hover{
+    background: rgb(102, 140, 222);
+}
+
+.dlt-modal-btn-cancel:hover{
+    color: var(--app-red);
+}
